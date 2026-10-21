@@ -1,35 +1,35 @@
 class Catmd < Formula
   desc "cat for Markdown: render Markdown as styled text in the terminal"
   homepage "https://github.com/dnedrow/catmd"
-  version "0.1.9"
+  version "0.1.10"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.9/catmd-aarch64-apple-darwin.tar.xz"
-      sha256 "1fbc969f3be50914b3d631e877d6f22c2a26cf955da80321aab91962283a1d15"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.10/catmd-aarch64-apple-darwin.tar.xz"
+      sha256 "a7cdaa75d6cd69c7d2ed9c10cb363cdccd751af821c2ed5db57733364b81bd14"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.9/catmd-x86_64-apple-darwin.tar.xz"
-      sha256 "3238274469941b1d2fa33a5d8a3b9f421d0b3324fef8d1b2eec5278d45a0959a"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.10/catmd-x86_64-apple-darwin.tar.xz"
+      sha256 "c0038d140b04d7145d5dba32bda20676e342a610e720a80b08dae1452c238afb"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.9/catmd-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "46795391f052a90ec30756b2cd80a1466d579a6819c8a77fbf18576888eb0bef"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.10/catmd-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "2acb13d8ad2a40c7507afd95cb260c1c8af4d0af4b6f75cba38b7ccc1c51316e"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.9/catmd-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "0eedabadabd5c81700d0a73a9d7134f695b7d2815f75a39471dbf6b7467a60bf"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.10/catmd-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "b52a485bada8cf638d7d91eebc9716220d67b80d6edd97e3605ea67e7efa08d9"
     end
   end
 
   BINARY_ALIASES = {
-    "aarch64-apple-darwin": {},
+    "aarch64-apple-darwin":      {},
     "aarch64-unknown-linux-gnu": {},
-    "x86_64-apple-darwin": {},
-    "x86_64-pc-windows-gnu": {},
-    "x86_64-unknown-linux-gnu": {}
-  }
+    "x86_64-apple-darwin":       {},
+    "x86_64-pc-windows-gnu":     {},
+    "x86_64-unknown-linux-gnu":  {},
+  }.freeze
 
   def target_triple
     cpu = Hardware::CPU.arm? ? "aarch64" : "x86_64"
@@ -38,10 +38,7 @@ class Catmd < Formula
     "#{cpu}-#{os}"
   end
 
-  def 
-man1.install "catmd.1" if File.exist?("catmd.1")
-
-    install_binary_aliases!
+  def install_binary_aliases!
     BINARY_ALIASES[target_triple.to_sym].each do |source, dests|
       dests.each do |dest|
         bin.install_symlink bin/source.to_s => dest
@@ -52,6 +49,7 @@ man1.install "catmd.1" if File.exist?("catmd.1")
   def install
     if OS.mac? && Hardware::CPU.arm?
       bin.install "catmd"
+      man1.install "catmd.1" if File.exist?("catmd.1")
     end
     if OS.mac? && Hardware::CPU.intel?
       bin.install "catmd"
@@ -63,15 +61,11 @@ man1.install "catmd.1" if File.exist?("catmd.1")
       bin.install "catmd"
     end
 
-    
-man1.install "catmd.1" if File.exist?("catmd.1")
-
     install_binary_aliases!
 
     # Homebrew will automatically install these, so we don't need to do that
     doc_files = Dir["README.*", "readme.*", "LICENSE", "LICENSE.*", "CHANGELOG.*"]
-    leftover_contents = 
-Dir["*"] - doc_files - ["catmd.1"]
+    leftover_contents = Dir["*"] - doc_files
 
     # Install any leftover files in pkgshare; these are probably config or
     # sample files.
