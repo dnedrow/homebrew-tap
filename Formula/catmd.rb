@@ -1,25 +1,25 @@
 class Catmd < Formula
   desc "cat for Markdown: render Markdown as styled text in the terminal"
   homepage "https://github.com/dnedrow/catmd"
-  version "0.1.5"
+  version "0.1.6"
   if OS.mac?
     if Hardware::CPU.arm?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.5/catmd-aarch64-apple-darwin.tar.xz"
-      sha256 "baa57a31eed688122dff038a138e316c3636f040deb1ed59de498faf55bdf32c"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.6/catmd-aarch64-apple-darwin.tar.xz"
+      sha256 "a200bd2bdb04dead1ef4521776da04fd64c4ac568a4ccf1adb767c5a3ac9841b"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.5/catmd-x86_64-apple-darwin.tar.xz"
-      sha256 "029f01d19d246f031999c0cea8bc68272742a414c33f9afee9858814c9a9fa02"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.6/catmd-x86_64-apple-darwin.tar.xz"
+      sha256 "8ee68d1908cf5de872be4c19b7a27bfee8ab41aff378bbbabc792cb14e1b16c4"
     end
   end
   if OS.linux?
     if Hardware::CPU.arm?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.5/catmd-aarch64-unknown-linux-gnu.tar.xz"
-      sha256 "a5e60d71b5da61bbb0da33f18e1e88f8e62895c96f551bdc254445cfe777a1f4"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.6/catmd-aarch64-unknown-linux-gnu.tar.xz"
+      sha256 "d568d58551f3bfa28bc391e0137d218513e57a556a31c54fc9ac7ecde37ae51f"
     end
     if Hardware::CPU.intel?
-      url "https://github.com/dnedrow/catmd/releases/download/v0.1.5/catmd-x86_64-unknown-linux-gnu.tar.xz"
-      sha256 "a242eb44e69c92130b2f3964acaed3ca19d9db8f554ba1cc922a40f2a2813ff1"
+      url "https://github.com/dnedrow/catmd/releases/download/v0.1.6/catmd-x86_64-unknown-linux-gnu.tar.xz"
+      sha256 "12652e389a20cd946364fb4ded31609cf868315cfa62cae43459beae97885ef9"
     end
   end
 
